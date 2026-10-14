@@ -1,0 +1,20 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  IMAGE_NAME: vinodhconnects/kube-static-website-india
+  IMAGE_TAG: latest
+
+build:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+  script:
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+    - docker push $IMAGE_NAME:$IMAGE_TAG
+
+
