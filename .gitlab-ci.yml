@@ -19,7 +19,7 @@ build:
 
 deploy:
   image: 
-    name: bitnami/kubectl:1.29
+    name: bitnami/kubectl:latest
     entrypoint: [""]
   stage: deploy
   before_script:
