@@ -12,7 +12,7 @@ build:
   services:
     - docker:dind
   before_script:
-    - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+    - echo "$CI_PASS" | docker login -u "$CI_USER" --password-stdin
   script:
     - docker build -t $IMAGE_NAME:$IMAGE_TAG .
     - docker push $IMAGE_NAME:$IMAGE_TAG
