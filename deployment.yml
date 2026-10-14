@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: static-web-vinodh
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: static-web-vinodh
+  template:
+    metadata:
+      labels:
+        app: static-web-vinodh
+    spec:
+      containers:
+      - name: nginx
+        image: vinodhconnects/kube-static-website-india:latest
+        ports:
+        - containerPort: 80
