@@ -17,4 +17,17 @@ build:
     - docker build -t $IMAGE_NAME:$IMAGE_TAG .
     - docker push $IMAGE_NAME:$IMAGE_TAG
 
+deploy:
+  image: 
+    name: bitnami/kubectl:1.29
+    entrypoint: [""]
+  stage: deploy
+  before_script:
+    - echo "$KUBECONFIG_DATA" > kubeconfig
+    - export KUBECONFIG=$CI_PROJECT_DIR/kubeconfig
+    - kubectl config get-contexts
+  script:
+    - kubectl apply -f deployment.yml
+    - kubectl apply -f service.yml
+
 
